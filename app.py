@@ -3,6 +3,7 @@ from flask_caching import Cache
 import os
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'tu_clave_secreta_aqui'
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 def get_image_files():
@@ -123,4 +124,4 @@ def favicon():
                              'favicon.png', mimetype='image/png')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

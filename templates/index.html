@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ffd6e7">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>¡Feliz Cumpleaños Mamá!</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+    
+    <!-- Optimized resource loading -->
+    {% for image in images[:1] %}
+    <link rel="preload" as="image" href="{{ url_for('static', filename='images/' + image.src) }}" type="image/webp">
+    {% endfor %}
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <br>
+        <h1>¡Feliz Cumpleaños Mamá!</h1>
+        
+        <div class="video-container">
+            {% if video.exists %}
+            <video 
+                {% if video.autoplay %}autoplay{% endif %}
+                {% if video.loop %}loop{% endif %}
+                {% if video.muted %}muted{% endif %}
+                playsinline
+                {% if video.poster_exists %}poster="{{ url_for('static', filename='video/' + video.poster) }}"{% endif %}
+                class="background-video">
+                <source src="{{ url_for('static', filename='video/' + video.name) }}" type="video/mp4">
+                Tu navegador no soporta la reproducción de videos.
+            </video>
+            {% endif %}
+        </div>
+
+        <div class="carousel">
+            <div class="carousel-inner">
+                {% for image in images %}
+                <div class="carousel-item">
+                    <picture>
+                        <source srcset="{{ url_for('static', filename='images/' + image.src) }}" type="image/webp">
+                        <img src="{{ url_for('static', filename='images/' + image.src.replace('.webp', '.jpg')) }}" 
+                             alt="{{ image.alt }}"
+                             loading="{{ 'eager' if loop.first else 'lazy' }}"
+                             data-title="{{ image.title }}"
+                             data-description="{{ image.description }}">
+                    </picture>
+                    <div class="carousel-caption">
+                        <h3>{{ image.title }}</h3>
+                        <p>{{ image.description }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="message">
+            <p>¡Que la abundancia y la prosperidad fluyan desde este día especial!</p>
+        </div>
+    </div>
+
+    <audio id="bgMusic" preload="metadata">
+        <source src="{{ url_for('static', filename='audio/' + audio.name) }}" type="audio/mpeg">
+    </audio>
+
+    <button id="audioControl" class="audio-control">
+        <span class="play-icon">🎵</span>
+        <span class="pause-icon" style="display:none">⏸️</span>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

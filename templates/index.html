@@ -49,9 +49,7 @@
                         <source srcset="{{ url_for('static', filename='images/' + image.src) }}" type="image/webp">
                         <img src="{{ url_for('static', filename='images/' + image.src.replace('.webp', '.jpg')) }}" 
                              alt="{{ image.alt }}"
-                             loading="{{ 'eager' if loop.first else 'lazy' }}"
-                             data-title="{{ image.title }}"
-                             data-description="{{ image.description }}">
+                             loading="{{ 'eager' if loop.first else 'lazy' }}">
                     </picture>
                 </div>
                 {% endfor %}

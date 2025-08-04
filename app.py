@@ -13,14 +13,14 @@ def get_image_files():
     images.sort()  # Ordena alfabéticamente
     return images
 
-IMAGE_DETAILS = {
+#IMAGE_DETAILS = {
     # El nombre del archivo es la clave
-    'cualquier-nombre.webp': {
-        'title': 'Tu título personalizado',
-        'description': 'Tu descripción personalizada'
-    }
+ #   'cualquier-nombre.webp': {
+  #      'title': 'Tu título personalizado',
+   #     'description': 'Tu descripción personalizada'
+    #}
     # Agrega más entradas según necesites
-}
+#}
 
 # Definir las imágenes y sus detalles usando los archivos reales
 def get_carousel_images():

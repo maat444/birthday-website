@@ -28,9 +28,9 @@ def get_carousel_images():
     return [
         {
             'src': img,
-            'alt': f'Recuerdo especial {i+1}',
-            'title': IMAGE_DETAILS.get(img, {}).get('title', f'Momento {i+1}'),
-            'description': IMAGE_DETAILS.get(img, {}).get('description', f'Descripción {i+1}')
+            # 'alt': f'Recuerdo especial {i+1}',
+            # 'title': IMAGE_DETAILS.get(img, {}).get('title', f'Momento {i+1}'),
+            # 'description': IMAGE_DETAILS.get(img, {}).get('description', f'Descripción {i+1}')
         }
         for i, img in enumerate(images[:4])  # Limita a 4 imágenes
     ]
